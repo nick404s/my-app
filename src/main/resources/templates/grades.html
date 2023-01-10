@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grades</title>
+    <link th:href="@{/grades-style.css}" rel="stylesheet">
+</head>
+<body>
+    <div class="topnav">
+        <a th:href="@{/}">Form</a>
+        <a th:href="@{/grades}">Grades</a>
+    </div>
+    <h1>hello Grades</h1>
+    <div class="container">
+        <table  id="grades-table">
+            <caption>Student Grades</caption>
+            
+            <tr>
+                <th>Student</th>
+                <th>Subject</th>
+                <th>Score</th>
+            </tr>
+
+            <tr th:each="grade: ${grades}">
+                <td th:text="${grade.name}"></td>
+                <td th:text="${grade.subject}"></td>
+                <td th:text="${grade.score}" ></td>
+                <td>
+                    <a role="button" id="update-btn" th:href="@{/(id = ${grade.id})}">Update</a>
+                </td>
+            </tr>
+            <!-- <tr th:object="${grade}">
+                <td th:text="*{name}"></td>
+                <td th:text="*{subject}"></td>
+                <td th:text="*{score == 'B'} ? *{score} + ': Good' : *{score} " ></td>
+            </tr> -->
+        </table>
+
+
+        <!-- <div th:switch="${second.score}">
+            <p th:case="'A'">Excellent!</p>
+            <p th:case="'B'">Good Job</p>
+            <p th:case="'C'">Lame Score..</p>
+            <p th:case="*" th:text="${second.score}"></p>
+        </div>
+        <h3 th:text="${#strings.contains(grade.subject, 'th') ? 'It''s Math!' : 'Not Math'}"></h3> -->
+    </div>
+
+</body>
+</html>

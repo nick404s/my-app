@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet"  th:href="@{/grades-style.css}">
+</head>
+<body>
+    <div class="topnav">
+        <a th:href="@{/}">Form</a>
+        <a th:href="@{/grades}">Grades</a>
+    </div>
+    <h1>Form Submission</h1>
+    <div class="container">
+        <form th:action="@{/submit}" method="post" th:object="${grade}">
+            <input type="text" placeholder="Name" th:field="*{name}">
+            <input type="text" placeholder="Score" th:field="*{score}">
+            <input type="text" placeholder="Subject" th:field="*{subject}">
+            <input type="hidden" th:field="*{id}">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
