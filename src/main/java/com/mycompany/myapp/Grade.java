@@ -2,9 +2,13 @@ package com.mycompany.myapp;
 
 import java.util.UUID;
 
+import javax.validation.constraints.NotBlank;
+
 public class Grade {
-    
+
+    @NotBlank(message = "Name is Required")
     private String name;
+    @NotBlank(message = "Subject is Required")
     private String subject;
     private String score;
     private String id;
@@ -13,13 +17,6 @@ public class Grade {
     {
         this.id = UUID.randomUUID().toString();
     }
-
-    // public Grade(String name, String subject, String score) {
-    //     this.name = name;
-    //     this.subject = subject;
-    //     this.score = score;
-    // }
-
 
     public String getId() {
         return this.id;

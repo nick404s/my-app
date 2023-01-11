@@ -3,8 +3,11 @@ package com.mycompany.myapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,9 +50,16 @@ public class AppController {
     }
 
     @PostMapping("/submit")
-    public String submitGrade(Grade grade)
+    public String submitGrade(@Valid Grade grade, BindingResult result)
     {
+        // check input
+        if (result.hasErrors()) 
+        {
+            return "form";
+        }
+
         int index = getGradeIndex(grade.getId());
+
         if (index == Constants.NOT_FOUND) 
         {
             studentGrades.add(grade);
