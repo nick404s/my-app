@@ -15,14 +15,15 @@
     <h1>Form Submission</h1>
     <div class="container">
         <form th:action="@{/submit}" method="post" th:object="${grade}">
-            Name: <br>
+            Name:
             <input type="text" placeholder="Name" th:field="*{name}">
             <small class="error" th:errors="*{name}"></small>
             <br>
-            Score: <br>
+            Score:
             <input type="text" placeholder="Score" th:field="*{score}">
+            <small class="error" th:errors="*{score}"></small>
             <br>
-            Subject: <br>
+            Subject:
             <input type="text" placeholder="Subject" th:field="*{subject}">
             <small class="error" th:errors="*{subject}"></small>        
             <input type="hidden" th:field="*{id}">
