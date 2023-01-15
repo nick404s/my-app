@@ -1,4 +1,4 @@
-package com.mycompany.myapp;
+package com.mycompany.myapp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +12,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mycompany.myapp.Constants;
+import com.mycompany.myapp.Grade;
+import com.mycompany.myapp.repository.GradeRepository;
+
 @Controller
 public class AppController {
     
-    List<Grade> studentGrades = new ArrayList<>();
+    GradeRepository gradeRepository = new GradeRepository();
+    
 
     @GetMapping("/grades")
     public String getGrades(Model model){
 
-       model.addAttribute("grades", studentGrades);
+       model.addAttribute("grades", gradeRepository.getGrades());
 
 
         return "grades"; // the template name
@@ -32,16 +37,16 @@ public class AppController {
         int index = getGradeIndex(id);
 
        model.addAttribute("grade", 
-                        index == Constants.NOT_FOUND ? new Grade() : studentGrades.get(index));
+                        index == Constants.NOT_FOUND ? new Grade() : gradeRepository.getGrade(index));
 
         return "form"; // the template name
     }
 
     public Integer getGradeIndex(String id)
     {
-        for (int i = 0; i < studentGrades.size(); i++) 
+        for (int i = 0; i < gradeRepository.getGrades().size(); i++) 
         {
-            if (studentGrades.get(i).getId().equals(id)) 
+            if (gradeRepository.getGrades().get(i).getId().equals(id)) 
             {
                 return i;
             }
@@ -62,11 +67,11 @@ public class AppController {
 
         if (index == Constants.NOT_FOUND) 
         {
-            studentGrades.add(grade);
+            gradeRepository.addGrade(grade);
         } 
         else 
         {
-            studentGrades.set(index, grade);
+            gradeRepository.updateGrade(grade, index);
         }
         return "redirect:/grades";
     }

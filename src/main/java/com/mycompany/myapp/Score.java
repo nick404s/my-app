@@ -14,7 +14,9 @@ import javax.validation.Payload;
 public @interface Score {
 
     // The nessesary elements for the Constraint annotation
+    //default message if constraint is violated
     String message() default "Invalid Data";
+    //boilerplate parameters
 	Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     
