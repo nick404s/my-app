@@ -1,8 +1,5 @@
 package com.mycompany.myapp.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
