@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+      <!--Script Reference[1]-->
+    <script src="https://cdn.zinggrid.com/dev/zinggrid-dev.min.js" defer></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +14,21 @@
         <a th:href="@{/}">Form</a>
         <a th:href="@{/grades}">Grades</a>
     </div>
-    <h1>hello Grades</h1>
+    <h1>Grades</h1>
     <div class="container">
-        <table  id="grades-table">
+        <table is="zing-grid" data-zg-columns-control  id="grades-table">
             <caption>Student Grades</caption>
-            
+            <colgroup>
+                <col data-zg-index="first" data-zg-sort-asc="true"></col>
+                <col data-zg-index="second"></col>
+                <col data-zg-index="third"></col>
+                <col data-zg-index="last" data-zg-type="button"></col>
+              </colgroup>
             <tr>
                 <th>Student</th>
                 <th>Subject</th>
                 <th>Score</th>
+                <th>Update</th>
             </tr>
 
             <tr th:each="grade: ${grades}">
@@ -47,6 +55,5 @@
         </div>
         <h3 th:text="${#strings.contains(grade.subject, 'th') ? 'It''s Math!' : 'Not Math'}"></h3> -->
     </div>
-
 </body>
 </html>
