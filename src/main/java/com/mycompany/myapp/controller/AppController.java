@@ -9,20 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mycompany.myapp.Constants;
 import com.mycompany.myapp.Grade;
-import com.mycompany.myapp.repository.GradeRepository;
+import com.mycompany.myapp.service.GradeService;
 
 @Controller
 public class AppController {
     
-    GradeRepository gradeRepository = new GradeRepository();
+    GradeService gradeService = new GradeService();
     
 
     @GetMapping("/grades")
     public String getGrades(Model model){
 
-       model.addAttribute("grades", gradeRepository.getGrades());
+       model.addAttribute("grades", gradeService.getGrades());
 
 
         return "grades"; // the template name
@@ -31,25 +30,11 @@ public class AppController {
     @GetMapping("/")
     public String submitForm(Model model, @RequestParam(required = false) String id)
     {
-        int index = getGradeIndex(id);
-
-       model.addAttribute("grade", 
-                        index == Constants.NOT_FOUND ? new Grade() : gradeRepository.getGrade(index));
+       model.addAttribute("grade", gradeService.getGradeById(id));
 
         return "form"; // the template name
     }
 
-    public Integer getGradeIndex(String id)
-    {
-        for (int i = 0; i < gradeRepository.getGrades().size(); i++) 
-        {
-            if (gradeRepository.getGrades().get(i).getId().equals(id)) 
-            {
-                return i;
-            }
-        }
-        return Constants.NOT_FOUND;
-    }
 
     @PostMapping("/submit")
     public String submitGrade(@Valid Grade grade, BindingResult result)
@@ -60,16 +45,8 @@ public class AppController {
             return "form";
         }
 
-        int index = getGradeIndex(grade.getId());
+        gradeService.submitGrade(grade);
 
-        if (index == Constants.NOT_FOUND) 
-        {
-            gradeRepository.addGrade(grade);
-        } 
-        else 
-        {
-            gradeRepository.updateGrade(grade, index);
-        }
         return "redirect:/grades";
     }
 }

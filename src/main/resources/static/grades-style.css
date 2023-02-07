@@ -5,6 +5,10 @@ body{
     margin: 0;
 }
 
+.topnav{
+    text-decoration: none;
+}
+
 input {
     margin-bottom: 10px;
     border: 2px solid rgb(210, 210, 210);
@@ -17,6 +21,7 @@ input {
 form {
     padding: 30px 40px;
 }
+
 
 #update-btn, #submit-btn {
     cursor: pointer;
