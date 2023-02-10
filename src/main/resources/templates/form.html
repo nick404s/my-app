@@ -8,10 +8,10 @@
     <link rel="stylesheet"  th:href="@{/grades-style.css}">
 </head>
 <body>
-    <div class="topnav">
+    <nav class="topnav">
         <a th:href="@{/}">Form</a>
         <a th:href="@{/grades}">Grades</a>
-    </div>
+    </nav>
     <h1>Form Submission</h1>
     <div class="container">
         <form th:action="@{/submit}" method="post" th:object="${grade}">
