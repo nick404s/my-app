@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.mycompany.myapp.Grade;
 
-@Component
+@Repository
 public class GradeRepository {
 
     private List<Grade> studentGrades = new ArrayList<>();
