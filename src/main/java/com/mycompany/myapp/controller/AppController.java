@@ -2,7 +2,6 @@ package com.mycompany.myapp.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +15,14 @@ import com.mycompany.myapp.service.GradeService;
 @Controller
 public class AppController {
     
-    @Autowired
-    GradeService gradeService; // inject the grade service
     
+    GradeService gradeService; // inject the grade service
 
+    public AppController(GradeService gradeService) {
+        this.gradeService = gradeService;
+    }
+    
+    
     @GetMapping("/grades")
     public String getGrades(Model model){
 
